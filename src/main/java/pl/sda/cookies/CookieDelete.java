@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Map;
 
 @WebServlet("/CookieDelete")
 public class CookieDelete extends HttpServlet {
@@ -20,10 +19,13 @@ public class CookieDelete extends HttpServlet {
                 //System.out.println("Deleting cookie: " + req.getParameter("delete-name"));
                 cookie.setMaxAge(0);
                 deleted = true;
+                resp.addCookie(cookie);
+                break;
             }
         }
 
         req.setAttribute("deleted",deleted);
+
         req.getRequestDispatcher("/cookieRemoved.jsp").forward(req,resp);
     }
 }
